@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<style>
+			picture {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				text-align: center;
+				width: 6.25rem;
+				padding: 1rem;
+			}
+			img {
+				box-shadow: 0 0 15px rgb(32, 14, 14);
+				border-radius: 50%;
+				width: 100%;
+			}
+
+			.is-small {
+				width: 3.125rem;
+			}
+
+			.is-big {
+				width: 12.5rem;
+			}
+
+			.disabled {
+				opacity: 0.5;
+			}
+		</style>
+		<script
+			crossorigin
+			src="https://unpkg.com/react@17/umd/react.development.js"
+		></script>
+		<script
+			crossorigin
+			src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+		></script>
+		<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	</head>
+	<body>
+		<h1>Women in tech</h1>
+		<div id="app"></div>
+		<script type="text/babel">
+			const $app = document.getElementById('app')
+			const useState = React.useState
+
+			const Avatar = ({ id, size, name = 'kitty' }) => {
+				const [enabled, setEnabled] = useState(true)
+
+				const src = `https://randomuser.me/api/portraits/women/${id}.jpg`
+
+				let pictureClassName = ''
+
+				if (size === 'small') {
+					pictureClassName = 'is-small'
+				} else if (size === 'big') {
+					pictureClassName = 'is-big'
+				}
+
+				const imgClassName = enabled ? '' : 'disabled'
+
+				return (
+					<picture className={pictureClassName}>
+						{id ? (
+							<img
+								src={src}
+								className={imgClassName}
+								onClick={() => setEnabled(!enabled)}
+							/>
+						) : (
+							<strong>Sin imagen</strong>
+						)}
+
+						<strong>{enabled ? name : 'Desactivada'}</strong>
+					</picture>
+				)
+			}
+
+			ReactDOM.render(
+				<div>
+					<Avatar />
+					<Avatar id={10} name={'Lolita'} size="small" />
+					<Avatar id={30} />
+					<Avatar id={20} name={'Mari Trini'} size="big" />
+				</div>,
+				$app
+			)
+
+			// const Avatar = props => {
+			//   const src = `https://randomuser.me/api/portraits/women/${props.id}.jpg`
+			//   return `
+			//     <picture>
+			//       <img src="${src}" alt="" />
+			//       <strong>${props.name}</strong>
+			//     </picture>
+			//   `
+			// }
+
+			// $app.innerHTML += Avatar({ id: 1, name: 'Andrea'})
+			// $app.innerHTML += Avatar({ id: 2, name: 'Manuela'})
+			// $app.innerHTML += Avatar({ id: 3, name: 'Juanita'})
+
+			// $app.querySelectorAll('img').forEach(item => {
+			//   item.addEventListener('click', () => {
+			//     item.classList.toggle('disabled')
+			//   })
+			// })
+		</script>
+	</body>
+</html>
