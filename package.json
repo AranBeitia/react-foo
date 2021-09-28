@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/AranBeitia/react-foo/issues"
   },
-  "homepage": "https://github.com/AranBeitia/react-foo#readme"
+  "homepage": "https://github.com/AranBeitia/react-foo#readme",
+  "dependencies": {
+    "react-toast": "^1.0.3",
+    "react-toastify": "^8.0.3"
+  }
 }
